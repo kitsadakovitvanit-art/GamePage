@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR.K GAME GUILDE — Game Discovery Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg-deep: #171B33;
+  --bg-mid: #1F2547;
+  --panel: #232A52;
+  --panel-raised: #2C3565;
+  --line: #3A4278;
+  --text: #F4F2FF;
+  --text-dim: #A6ADD9;
+  --yellow: #FFC93C;
+  --purple: #8B6CF0;
+  --orange: #FF8A3D;
+  --pc: #2FD1C8;
+  --ps: #4C82FF;
+  --xb: #4CD971;
+  --sw: #FF5D5D;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.55;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(139,108,240,0.16), transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(76,217,113,0.10), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(255,201,60,0.08), transparent 50%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 26px);
+}
+
+.display{ font-family: 'Fredoka', sans-serif; }
+.mono{ font-family: 'Space Mono', monospace; }
+a{ color: inherit; }
+img{ display:block; max-width:100%; }
+
+/* ============ HEADER ============ */
+header.top{
+  border-bottom: 3px solid var(--line);
+  background: var(--bg-mid);
+  position: sticky; top:0; z-index: 50;
+}
+.top-inner{
+  max-width: 1180px; margin:0 auto;
+  padding: 16px 20px;
+  display:flex; align-items:center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.wordmark{
+  font-family:'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+  display:flex; align-items:center; gap:10px;
+  letter-spacing: 0.01em;
+}
+.wordmark span.tag{
+  font-family:'Nunito', sans-serif;
+  font-weight:800;
+  font-size: 0.6rem;
+  color: var(--bg-deep);
+  background: var(--orange);
+  padding: 5px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-shadow:none;
+}
+.clock-block{
+  font-family:'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  display:flex; align-items:center; gap:8px;
+  background: var(--panel);
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.dot-live{
+  width:7px; height:7px; border-radius:50%;
+  background: var(--xb);
+  display:inline-block;
+  animation: pulse 1.6s infinite;
+}
+@media (prefers-reduced-motion: reduce){ .dot-live{ animation:none; } }
+@keyframes pulse{
+  0%,100%{ opacity:1; }
+  50%{ opacity:0.25; }
+}
+
+/* ============ TICKER ============ */
+.ticker-wrap{
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.ticker-wrap::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: linear-gradient(to right, var(--panel) 0%, transparent 4%, transparent 96%, var(--panel) 100%);
+}
+.ticker-track{
+  display:inline-block;
+  padding: 9px 0;
+  animation: scroll-left 38s linear infinite;
+}
+@media (prefers-reduced-motion: reduce){ .ticker-track{ animation: none; } }
+@keyframes scroll-left{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+.ticker-item{
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 0 28px;
+  border-right: 1px solid var(--line);
+}
+.ticker-item b{ color: var(--yellow); font-weight:800; }
+.ticker-item .plat{ color: var(--text); }
+.ticker-item .mono{ opacity:0.7; }
+
+/* ============ SHELL ============ */
+main{ max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+/* ============ HERO (two column, like a split app screen) ============ */
+.hero{
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.hero h1{
+  font-family:'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  line-height: 1.12;
+  margin: 0 0 16px;
+  max-width: 15ch;
+}
+.hero p.lead{
+  color: var(--text-dim);
+  max-width: 52ch;
+  font-size: 1.02rem;
+  margin: 0 0 20px;
+}
+.feature-list{
+  list-style:none; margin: 0 0 26px; padding:0;
+  display:flex; flex-direction:column; gap:9px;
+}
+.feature-list li{
+  display:flex; align-items:flex-start; gap:10px;
+  font-weight: 600; font-size: 0.95rem;
+}
+.feature-list li .arrow{
+  color: var(--yellow);
+  font-weight: 800;
+  flex-shrink:0;
+}
+.platform-row{
+  display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 28px;
+}
+.platform-pill{
+  display:flex; align-items:center; gap:7px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--bg-deep);
+  box-shadow: 0 3px 0 rgba(0,0,0,0.25);
+}
+.platform-pill.pc{ background: var(--pc); }
+.platform-pill.ps{ background: var(--ps); }
+.platform-pill.xb{ background: var(--xb); }
+.platform-pill.sw{ background: var(--sw); }
+
+.hero-meta{
+  display:flex; gap: 22px; flex-wrap: wrap;
+}
+.hero-meta .stat{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  min-width: 110px;
+}
+.hero-meta strong{
+  display:block; font-family:'Fredoka'; font-weight:700; font-size:1.5rem; color: var(--yellow);
+}
+.hero-meta .label{ font-size: 0.72rem; color: var(--text-dim); font-weight:700; }
+
+/* leaderboard card */
+.leaderboard{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.25);
+}
+.leaderboard h2{
+  font-family:'Fredoka'; font-weight:700; font-size: 1.05rem; margin: 0 0 16px;
+  display:flex; align-items:center; gap:8px;
+}
+.lb-row{
+  display:flex; align-items:center; gap:12px;
+  padding: 9px 8px;
+  border-radius: var(--radius-sm);
+}
+.lb-row + .lb-row{ margin-top:4px; }
+.lb-row:hover{ background: var(--panel-raised); }
+.lb-rank{
+  width: 26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Fredoka'; font-weight:700; font-size:0.82rem;
+  color: var(--bg-deep);
+  flex-shrink:0;
+}
+.lb-rank.gold{ background: #FFD54A; }
+.lb-rank.silver{ background: #D8DCE8; }
+.lb-rank.bronze{ background: #E8A15D; }
+.lb-rank.plain{ background: var(--line); color: var(--text); }
+.lb-thumb{ width:38px; height:38px; border-radius:9px; object-fit:cover; flex-shrink:0; }
+.lb-info{ flex:1; min-width:0; }
+.lb-info .t{ font-weight:800; font-size:0.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-info .p{ font-size:0.7rem; color: var(--text-dim); font-weight:700; }
+.lb-rating{ font-family:'Fredoka'; font-weight:700; color: var(--yellow); font-size:0.92rem; flex-shrink:0; }
+
+/* ============ TUNER ============ */
+.tuner{ padding: 34px 0 12px; }
+.tuner-head{
+  display:flex; align-items:baseline; justify-content:space-between; gap: 16px; flex-wrap:wrap;
+  margin-bottom: 18px;
+}
+.tuner h2{ font-family:'Fredoka'; font-size: 1.2rem; margin:0; font-weight:600; }
+.tuner-count{ font-size: 0.85rem; color: var(--text-dim); font-weight:700; }
+.tuner-count b{ color: var(--xb); }
+
+.chip-groups{ display:flex; flex-direction:column; gap:14px; margin-bottom: 12px; }
+.chip-row{ display:flex; gap:9px; flex-wrap:wrap; align-items:center; }
+.chip-row .label{
+  font-size: 0.72rem; font-weight:800; letter-spacing:0.03em;
+  color: var(--text-dim);
+  width: 82px; flex-shrink: 0;
+}
+.chip{
+  font-family:'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  color: var(--text-dim);
+  padding: 8px 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .1s, border-color .12s, color .12s, background .12s, box-shadow .12s;
+}
+.chip:hover{ border-color: var(--text-dim); color: var(--text); transform: translateY(-1px); }
+.chip[aria-pressed="true"]{
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.3);
+}
+.chip.plat-pc[aria-pressed="true"]{ background: var(--pc); border-color: var(--pc); color: var(--bg-deep); }
+.chip.plat-ps[aria-pressed="true"]{ background: var(--ps); border-color: var(--ps); color: #fff; }
+.chip.plat-xb[aria-pressed="true"]{ background: var(--xb); border-color: var(--xb); color: var(--bg-deep); }
+.chip.plat-sw[aria-pressed="true"]{ background: var(--sw); border-color: var(--sw); color: #fff; }
+
+.reset-link{
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background:none; border:none;
+  text-decoration: underline;
+  cursor:pointer;
+  padding: 0;
+}
+.reset-link:hover{ color: var(--yellow); }
+
+/* ============ GUIDE GRID ============ */
+.guide{ padding: 22px 0 50px; display: grid; gap: 14px; }
+.row{
+  display:flex;
+  gap: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.18);
+  transition: transform .12s, box-shadow .12s;
+}
+.row:hover{ transform: translateY(-2px); box-shadow: 0 7px 0 rgba(0,0,0,0.2); }
+.row.pc{ border-left-color: var(--pc); }
+.row.ps{ border-left-color: var(--ps); }
+.row.xb{ border-left-color: var(--xb); }
+.row.sw{ border-left-color: var(--sw); }
+
+.row-thumb{
+  width: 84px; height:84px; border-radius: 12px; object-fit: cover; flex-shrink:0;
+  border: 2px solid var(--line);
+}
+.row-info{ flex:1; min-width:0; }
+.title-line{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom: 4px; }
+.row-info h3{ font-family:'Fredoka'; font-size: 1.05rem; margin:0; font-weight:600; }
+.genre-tag{
+  font-size: 0.65rem; font-weight:800; color: var(--bg-deep);
+  background: var(--yellow);
+  padding: 3px 9px; border-radius: 999px;
+}
+.row-info p.blurb{ margin: 0 0 10px; color: var(--text-dim); font-size: 0.88rem; }
+.meta-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.plat-badge{
+  font-size: 0.68rem; font-weight: 800; padding: 4px 9px; border-radius: 999px; color: var(--bg-deep);
+}
+.plat-badge.pc{ background: var(--pc); }
+.plat-badge.ps{ background: var(--ps); color:#fff; }
+.plat-badge.xb{ background: var(--xb); }
+.plat-badge.sw{ background: var(--sw); color:#fff; }
+.ch-num{ font-family:'Space Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
+.recency{
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.02em; color: var(--text-dim);
+  border: 1px solid var(--line); padding: 3px 8px; border-radius: 999px;
+}
+.recency.today{ color: var(--bg-deep); background: var(--xb); border-color: var(--xb); }
+.rating{
+  font-family:'Fredoka'; font-weight: 700; font-size: 0.95rem; color: var(--yellow); margin-left:auto;
+}
+.rating span{ color: var(--text-dim); font-size:0.68rem; font-family:'Nunito'; font-weight:700; }
+
+.empty-state{
+  text-align:center; padding: 50px 20px;
+  border: 2px dashed var(--line); border-radius: var(--radius);
+  color: var(--text-dim); font-weight:700; font-size: 0.9rem;
+}
+.empty-state button{ margin-top: 14px; display: inline-block; }
+
+/* ============ SCHEDULE TABLE ============ */
+.schedule{ padding: 10px 0 60px; border-top: 1px solid var(--line); }
+.schedule h2{ font-family:'Fredoka'; font-size: 1.2rem; font-weight:600; margin: 34px 0 18px; }
+.table-wrap{ overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table{ border-collapse: collapse; width: 100%; min-width: 640px; }
+th, td{ border: 1px solid var(--line); padding: 12px 14px; vertical-align: top; font-size: 0.85rem; }
+thead th{
+  background: var(--panel-raised); font-size: 0.7rem; color: var(--yellow);
+  text-align:left; font-weight:800; letter-spacing:0.03em;
+}
+tbody th{
+  background: var(--panel); font-size: 0.7rem; color: var(--text-dim);
+  white-space: nowrap; font-weight:800;
+}
+td{ background: var(--bg-mid); }
+.cell-game{ display:block; font-size: 0.82rem; font-weight:600; padding: 3px 0; }
+.cell-game + .cell-game{ border-top: 1px solid var(--line); margin-top: 4px; padding-top: 6px; }
+td:empty::after{ content:"—"; color: var(--line); }
+
+/* ============ FOOTER ============ */
+footer{ border-top: 1px solid var(--line); padding: 26px 20px 40px; text-align:center; }
+footer p{ font-size: 0.78rem; color: var(--text-dim); margin: 0; font-weight:600; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; }
+}
+@media (max-width: 640px){
+  .top-inner{ justify-content:center; text-align:center; }
+  .row{ flex-direction: column; }
+  .row-thumb{ width: 100%; height: 140px; }
+  .rating{ margin-left: 0; }
+  .chip-row .label{ width: auto; margin-bottom:2px; }
+  .chip-row{ flex-direction: column; align-items: flex-start; }
+  .hero-meta{ justify-content: space-between; }
+  .hero-meta .stat{ flex:1; min-width: 90px; }
+}
+@media (max-width: 420px){
+  .platform-row{ justify-content: center; }
+}
+
+:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="wordmark">MR.K <span class="tag">GAME GUILDE</span></div>
+    <div class="clock-block">
+      <span class="dot-live"></span>
+      <span>LOCAL TIME</span>
+      <span id="clock">00:00:00</span>
+    </div>
+  </div>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div>
+      <h1>Every new release, tuned to what you actually play.</h1>
+      <p class="lead">MR.K Game Guilde pulls from one shared catalog across PC, PlayStation, Xbox and Switch, and re-sorts it live as titles drop. Pick your platforms and genres — the guide updates instantly.</p>
+      <ul class="feature-list">
+        <li><span class="arrow">→</span> Live release ticker, updated every second</li>
+        <li><span class="arrow">→</span> Filter by platform and genre instantly</li>
+        <li><span class="arrow">→</span> One catalog across PC, PlayStation, Xbox &amp; Switch</li>
+      </ul>
+      <div class="platform-row">
+        <span class="platform-pill pc">🖥️ PC</span>
+        <span class="platform-pill ps">🎮 PS5</span>
+        <span class="platform-pill xb">🕹️ XBOX</span>
+        <span class="platform-pill sw">🔴 SWITCH</span>
+      </div>
+      <div class="hero-meta" id="heroMeta"></div>
+    </div>
+
+    <div class="leaderboard">
+      <h2>🏆 Top Rated This Week</h2>
+      <div id="lbList"></div>
+    </div>
+  </section>
+
+  <section class="tuner">
+    <div class="tuner-head">
+      <h2>Tune your signal</h2>
+      <div class="tuner-count"><b id="matchCount">24</b> signals matched</div>
+    </div>
+    <div class="chip-groups">
+      <div class="chip-row" id="platformChips"><span class="label">PLATFORM</span></div>
+      <div class="chip-row" id="genreChips"><span class="label">GENRE</span></div>
+    </div>
+    <button class="reset-link" id="resetBtn">clear all filters</button>
+  </section>
+
+  <section class="guide" id="guideGrid" aria-live="polite"></section>
+
+  <section class="schedule">
+    <h2>This month's lineup, by platform</h2>
+    <div class="table-wrap">
+      <table id="scheduleTable">
+        <thead>
+          <tr>
+            <th scope="col">WHEN</th>
+            <th scope="col">PC</th>
+            <th scope="col">PLAYSTATION</th>
+            <th scope="col">XBOX</th>
+            <th scope="col">SWITCH</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>MR.K Game Guilde is a demo catalog — all titles are fictional. Ratings, artwork and release windows regenerate each visit.</p>
+</footer>
+
+<script>
+const GAMES = [
+  {t:"Hollow Keep", plat:"pc", genre:"RPG", rating:8.4, recency:"this-week", daysAgo:3, blurb:"A castle keeps its dead close. So does the mortgage on it.", art:"castle,fantasyart"},
+  {t:"Ledger of Ash", plat:"pc", genre:"STRATEGY", rating:7.9, recency:"this-month", daysAgo:18, blurb:"Rule a kingdom by spreadsheet. The spreadsheet is judging you.", art:"map,conceptart"},
+  {t:"Static Choir", plat:"pc", genre:"HORROR", rating:8.7, recency:"today", daysAgo:0, blurb:"Four campers, one tape deck, and a hymn nobody wrote.", art:"forest,fantasyart"},
+  {t:"Vellum Run", plat:"pc", genre:"INDIE", rating:7.2, recency:"coming-soon", daysAgo:-14, blurb:"A platformer drawn in ink that hasn't dried yet.", art:"ink,illustration"},
+  {t:"Ironclad Tide", plat:"pc", genre:"STRATEGY", rating:8.1, recency:"this-month", daysAgo:22, blurb:"Command a navy that rusts in real time. Maintenance matters.", art:"warship,conceptart"},
+  {t:"Nightshade Protocol", plat:"pc", genre:"SHOOTER", rating:8.9, recency:"this-week", daysAgo:5, blurb:"Stealth through a city that remembers your last mistake.", art:"cyberpunk,digitalart"},
+  {t:"Loom & Lantern", plat:"pc", genre:"PUZZLE", rating:7.6, recency:"today", daysAgo:0, blurb:"Weave light through thread to coax open sealed doors.", art:"lantern,fantasyart"},
+  {t:"Fracture Point", plat:"ps", genre:"ACTION", rating:8.3, recency:"this-week", daysAgo:4, blurb:"Pilot a mech held together by duct tape and spite.", art:"mech,conceptart"},
+  {t:"Salt & Static", plat:"ps", genre:"HORROR", rating:8.0, recency:"this-month", daysAgo:15, blurb:"A lighthouse keeper's radio picks up one extra voice.", art:"lighthouse,digitalart"},
+  {t:"Kindling", plat:"ps", genre:"ADVENTURE", rating:8.6, recency:"this-week", daysAgo:2, blurb:"Carry a dying ember across a world that's gone cold.", art:"campfire,fantasyart"},
+  {t:"Riftbound Legion", plat:"ps", genre:"SHOOTER", rating:7.5, recency:"coming-soon", daysAgo:-7, blurb:"Squad-based warfare across a fault line in reality itself.", art:"scifi,conceptart"},
+  {t:"Paper Cities", plat:"ps", genre:"PUZZLE", rating:7.8, recency:"this-month", daysAgo:20, blurb:"Fold entire skylines from a single sheet of origami.", art:"origami,illustration"},
+  {t:"Undertow Circuit", plat:"ps", genre:"RACING", rating:7.4, recency:"today", daysAgo:0, blurb:"Underwater racing where the current is your real opponent.", art:"underwater,digitalart"},
+  {t:"Granite Hollow", plat:"xb", genre:"RPG", rating:8.2, recency:"this-week", daysAgo:6, blurb:"Miners strike something that strikes back, slowly, for centuries.", art:"cave,fantasyart"},
+  {t:"Meridian Drift", plat:"xb", genre:"RACING", rating:7.7, recency:"this-month", daysAgo:12, blurb:"Arcade racing across a desert that rearranges itself nightly.", art:"desert,conceptart"},
+  {t:"Choir of Wires", plat:"xb", genre:"SHOOTER", rating:8.5, recency:"today", daysAgo:1, blurb:"Robots singing hymns while you dismantle the choir.", art:"robot,digitalart"},
+  {t:"Sable Orchard", plat:"xb", genre:"INDIE", rating:7.0, recency:"coming-soon", daysAgo:-21, blurb:"Farm sim where the crops keep unusual hours.", art:"farm,illustration"},
+  {t:"Last Ferry", plat:"xb", genre:"ADVENTURE", rating:8.8, recency:"this-week", daysAgo:3, blurb:"The last boat off the island runs on favors, not fuel.", art:"boat,fantasyart"},
+  {t:"Bone Orchard Tactics", plat:"xb", genre:"STRATEGY", rating:7.9, recency:"this-month", daysAgo:25, blurb:"Tactics game where your fallen units become new terrain.", art:"battlefield,conceptart"},
+  {t:"Pocket Foundry", plat:"sw", genre:"INDIE", rating:7.3, recency:"this-month", daysAgo:10, blurb:"Forge tiny machines that build slightly bigger machines.", art:"gears,steampunk"},
+  {t:"Moth & Ember", plat:"sw", genre:"ADVENTURE", rating:8.1, recency:"this-week", daysAgo:4, blurb:"Guide a moth toward a light that keeps moving.", art:"moth,fantasyart"},
+  {t:"Tin Can Regatta", plat:"sw", genre:"RACING", rating:6.9, recency:"today", daysAgo:0, blurb:"Backyard boat racing, string and tin cans included.", art:"toyboat,illustration"},
+  {t:"Whistling Vale", plat:"sw", genre:"RPG", rating:8.4, recency:"this-month", daysAgo:16, blurb:"A cozy RPG where every villager remembers your birthday.", art:"village,fantasyart"},
+  {t:"Static Garden", plat:"sw", genre:"PUZZLE", rating:7.5, recency:"coming-soon", daysAgo:-10, blurb:"Grow a garden that only blooms in dead channels.", art:"garden,digitalart"},
+];
+
+const IMG_MAP = {
+  "Hollow Keep": "images/hollow-keep.jpg",
+  "Ledger of Ash": "images/ledger-of-ash.jpg",
+  "Static Choir": "images/static-choir.jpg",
+  "Vellum Run": "images/vellum-run.jpg",
+  "Ironclad Tide": "images/ironclad-tide.jpg",
+  "Nightshade Protocol": "images/nightshade-protocol.jpg",
+  "Loom & Lantern": "images/loom-and-lantern.jpg",
+  "Fracture Point": "images/fracture-point.jpg",
+  "Salt & Static": "images/salt-and-static.jpg",
+  "Kindling": "images/kindling.jpg",
+  "Riftbound Legion": "images/riftbound-legion.jpg",
+  "Paper Cities": "images/paper-cities.jpg",
+  "Undertow Circuit": "images/undertow-circuit.jpg",
+  "Granite Hollow": "images/granite-hollow.jpg",
+  "Meridian Drift": "images/meridian-drift.jpg",
+  "Choir of Wires": "images/choir-of-wires.jpg",
+  "Sable Orchard": "images/sable-orchard.jpg",
+  "Last Ferry": "images/last-ferry.jpg",
+  "Bone Orchard Tactics": "images/bone-orchard-tactics.jpg",
+  "Pocket Foundry": "images/pocket-foundry.jpg",
+  "Moth & Ember": "images/moth-and-ember.jpg",
+  "Tin Can Regatta": "images/tin-can-regatta.jpg",
+  "Whistling Vale": "images/whistling-vale.jpg",
+  "Static Garden": "images/static-garden.jpg",
+};
+
+GAMES.forEach((g,i)=>{
+  g.ch = "CH" + String(i+1).padStart(2,"0");
+  g.img = IMG_MAP[g.t] || `https://loremflickr.com/240/240/${g.art}?lock=${i+1}`;
+});
+
+const PLAT_LABEL = {pc:"PC", ps:"PS5", xb:"XBOX", sw:"SWITCH"};
+const RECENCY_LABEL = {"today":"TODAY","this-week":"THIS WEEK","this-month":"THIS MONTH","coming-soon":"COMING SOON"};
+const RECENCY_ORDER = {"today":0,"this-week":1,"this-month":2,"coming-soon":3};
+const GENRES = [...new Set(GAMES.map(g=>g.genre))];
+
+const state = { platforms: new Set(), genres: new Set() };
+
+/* ---------- build chip rows ---------- */
+const platformChipRow = document.getElementById("platformChips");
+Object.entries(PLAT_LABEL).forEach(([key,label])=>{
+  const btn = document.createElement("button");
+  btn.className = "chip plat-" + key;
+  btn.textContent = label;
+  btn.setAttribute("aria-pressed","false");
+  btn.addEventListener("click", ()=>{
+    if(state.platforms.has(key)){ state.platforms.delete(key); btn.setAttribute("aria-pressed","false"); }
+    else{ state.platforms.add(key); btn.setAttribute("aria-pressed","true"); }
+    render();
+  });
+  platformChipRow.appendChild(btn);
+});
+
+const genreChipRow = document.getElementById("genreChips");
+GENRES.forEach(genre=>{
+  const btn = document.createElement("button");
+  btn.className = "chip";
+  btn.textContent = genre;
+  btn.setAttribute("aria-pressed","false");
+  btn.addEventListener("click", ()=>{
+    if(state.genres.has(genre)){ state.genres.delete(genre); btn.setAttribute("aria-pressed","false"); }
+    else{ state.genres.add(genre); btn.setAttribute("aria-pressed","true"); }
+    render();
+  });
+  genreChipRow.appendChild(btn);
+});
+
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  state.platforms.clear();
+  state.genres.clear();
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+  render();
+});
+
+/* ---------- render guide grid ---------- */
+const grid = document.getElementById("guideGrid");
+const matchCount = document.getElementById("matchCount");
+
+function render(){
+  let list = GAMES.filter(g=>{
+    const platOk = state.platforms.size === 0 || state.platforms.has(g.plat);
+    const genreOk = state.genres.size === 0 || state.genres.has(g.genre);
+    return platOk && genreOk;
+  });
+  list.sort((a,b)=> RECENCY_ORDER[a.recency]-RECENCY_ORDER[b.recency] || b.rating-a.rating);
+
+  matchCount.textContent = list.length;
+  grid.innerHTML = "";
+
+  if(list.length === 0){
+    grid.innerHTML = `<div class="empty-state">No signal on the selected channels.<br>
+      <button class="reset-link" onclick="document.getElementById('resetBtn').click()">clear filters to reconnect</button>
+    </div>`;
+    return;
+  }
+
+  list.forEach(g=>{
+    const row = document.createElement("article");
+    row.className = "row " + g.plat;
+    row.innerHTML = `
+      <img class="row-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
+      <div class="row-info">
+        <div class="title-line">
+          <h3>${g.t}</h3>
+          <span class="genre-tag">${g.genre}</span>
+        </div>
+        <p class="blurb">${g.blurb}</p>
+        <div class="meta-row">
+          <span class="plat-badge ${g.plat}">${PLAT_LABEL[g.plat]}</span>
+          <span class="ch-num">${g.ch}</span>
+          <span class="recency ${g.recency === 'today' ? 'today' : ''}">${RECENCY_LABEL[g.recency]}</span>
+          <span class="rating">${g.rating.toFixed(1)}<span> / 10</span></span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(row);
+  });
+}
+render();
+
+/* ---------- hero meta stats ---------- */
+document.getElementById("heroMeta").innerHTML = `
+  <div class="stat"><strong>${GAMES.length}</strong><span class="label">TITLES IN CATALOG</span></div>
+  <div class="stat"><strong>${Object.keys(PLAT_LABEL).length}</strong><span class="label">PLATFORMS TRACKED</span></div>
+  <div class="stat"><strong>${GAMES.filter(g=>g.recency==='today').length}</strong><span class="label">ADDED TODAY</span></div>
+`;
+
+/* ---------- leaderboard ---------- */
+const lbList = document.getElementById("lbList");
+const topGames = [...GAMES].sort((a,b)=>b.rating-a.rating).slice(0,5);
+const rankClasses = ["gold","silver","bronze","plain","plain"];
+lbList.innerHTML = topGames.map((g,i)=>`
+  <div class="lb-row">
+    <div class="lb-rank ${rankClasses[i]}">${i+1}</div>
+    <img class="lb-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
+    <div class="lb-info">
+      <div class="t">${g.t}</div>
+      <div class="p">${PLAT_LABEL[g.plat]} · ${g.genre}</div>
+    </div>
+    <div class="lb-rating">${g.rating.toFixed(1)}</div>
+  </div>
+`).join("");
+
+/* ---------- schedule table ---------- */
+const scheduleBody = document.querySelector("#scheduleTable tbody");
+const ROWS = ["today","this-week","this-month","coming-soon"];
+ROWS.forEach(recency=>{
+  const tr = document.createElement("tr");
+  const th = document.createElement("th");
+  th.scope = "row";
+  th.textContent = RECENCY_LABEL[recency];
+  tr.appendChild(th);
+  Object.keys(PLAT_LABEL).forEach(plat=>{
+    const td = document.createElement("td");
+    const matches = GAMES.filter(g=>g.plat===plat && g.recency===recency);
+    td.innerHTML = matches.map(g=>`<span class="cell-game">${g.t}</span>`).join("");
+    tr.appendChild(td);
+  });
+  scheduleBody.appendChild(tr);
+});
+
+/* ---------- live clock ---------- */
+function tickClock(){
+  const now = new Date();
+  document.getElementById("clock").textContent = now.toLocaleTimeString([], {hour12:false});
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+/* ---------- ticker: simulated real-time "just added" feed ---------- */
+const freshDrops = GAMES.filter(g=>g.recency==="today").concat(
+  GAMES.filter(g=>g.recency==="this-week").slice(0,2)
+);
+const tickerState = freshDrops.map(g=>({ game:g, seconds: Math.floor(Math.random()*180) + 20 }));
+
+function formatAgo(s){
+  if(s < 60) return s + "s ago";
+  const m = Math.floor(s/60);
+  if(m < 60) return m + "m ago";
+  const h = Math.floor(m/60);
+  return h + "h ago";
+}
+
+function renderTicker(){
+  const track = document.getElementById("ticker");
+  const build = () => tickerState.map(entry => `
+    <span class="ticker-item">
+      <b>JUST ADDED</b> — <span class="plat">${PLAT_LABEL[entry.game.plat]}</span> ${entry.game.t}
+      <span class="mono">· ${formatAgo(entry.seconds)}</span>
+    </span>
+  `).join("");
+  track.innerHTML = build() + build(); // duplicate for seamless loop
+}
+renderTicker();
+setInterval(()=>{
+  tickerState.forEach(e=> e.seconds += 1);
+  renderTicker();
+}, 1000);
+</script>
+
+</body>
+</html>
