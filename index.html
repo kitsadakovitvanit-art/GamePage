@@ -646,7 +646,7 @@ const lbList = document.getElementById("lbList");
 const topGames = [...GAMES].sort((a,b)=>b.rating-a.rating).slice(0,5);
 const rankClasses = ["gold","silver","bronze","plain","plain"];
 lbList.innerHTML = topGames.map((g,i)=>`
-  <div class="lb-row">
+  <${g.link ? "a href=\"" + g.link + "\" style=\"text-decoration:none;color:inherit;\"" : "div"} class="lb-row">
     <div class="lb-rank ${rankClasses[i]}">${i+1}</div>
     <img class="lb-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
     <div class="lb-info">
@@ -654,7 +654,7 @@ lbList.innerHTML = topGames.map((g,i)=>`
       <div class="p">${PLAT_LABEL[g.plat]} · ${g.genre}</div>
     </div>
     <div class="lb-rating">${g.rating.toFixed(1)}</div>
-  </div>
+  </${g.link ? "a" : "div"}>
 `).join("");
 
 /* ---------- schedule table ---------- */
