@@ -504,6 +504,7 @@ const GAMES = [
   {t:"Tin Can Regatta", plat:"sw", genre:"RACING", rating:6.9, recency:"today", daysAgo:0, blurb:"Backyard boat racing, string and tin cans included.", art:"toyboat,illustration"},
   {t:"Whistling Vale", plat:"sw", genre:"RPG", rating:8.4, recency:"this-month", daysAgo:16, blurb:"A cozy RPG where every villager remembers your birthday.", art:"village,fantasyart"},
   {t:"Static Garden", plat:"sw", genre:"PUZZLE", rating:7.5, recency:"coming-soon", daysAgo:-10, blurb:"Grow a garden that only blooms in dead channels.", art:"garden,digitalart"},
+  {t:"Cats Game", plat:"pc", genre:"CASUAL", rating:9.0, recency:"today", daysAgo:0, blurb:"Collect adorable cats and gather coins together!", art:"cats,cute", link:"cat-game.html"},
 ];
 
 const IMG_MAP = {
@@ -531,6 +532,7 @@ const IMG_MAP = {
   "Tin Can Regatta": "images/tin-can-regatta.jpg",
   "Whistling Vale": "images/whistling-vale.jpg",
   "Static Garden": "images/static-garden.jpg",
+  "Cats Game": "images/cats-game.jpg",
 };
 
 GAMES.forEach((g,i)=>{
@@ -605,7 +607,11 @@ function render(){
 
   list.forEach(g=>{
     const row = document.createElement("article");
-    row.className = "row " + g.plat;
+    row.className = "row " + g.plat + (g.link ? " has-link" : "");
+    if(g.link){
+      row.style.cursor = "pointer";
+      row.addEventListener("click", ()=> window.open(g.link, "_blank"));
+    }
     row.innerHTML = `
       <img class="row-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
       <div class="row-info">
