@@ -610,7 +610,7 @@ function render(){
     row.className = "row " + g.plat + (g.link ? " has-link" : "");
     if(g.link){
       row.style.cursor = "pointer";
-      row.addEventListener("click", ()=> window.open(g.link, "_blank"));
+      row.addEventListener("click", ()=> { window.location.href = g.link; });
     }
     row.innerHTML = `
       <img class="row-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
