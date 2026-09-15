@@ -606,11 +606,12 @@ function render(){
   }
 
   list.forEach(g=>{
-    const row = document.createElement("article");
+    const row = document.createElement(g.link ? "a" : "article");
     row.className = "row " + g.plat + (g.link ? " has-link" : "");
     if(g.link){
-      row.style.cursor = "pointer";
-      row.addEventListener("click", ()=> { window.location.href = g.link; });
+      row.href = g.link;
+      row.style.textDecoration = "none";
+      row.style.color = "inherit";
     }
     row.innerHTML = `
       <img class="row-thumb" src="${g.img}" alt="${g.t} artwork" loading="lazy">
